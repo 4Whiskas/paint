@@ -1,16 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_drawing_board/flutter_drawing_board.dart';
-import 'package:paint/presentation/screens/home/enums/paint_tool.dart';
-import 'package:stacked/stacked.dart';
 import 'package:paint/gen/assets.gen.dart';
 import 'package:paint/gen/colors.gen.dart';
 import 'package:paint/gen/locale_keys.g.dart';
 import 'package:paint/presentation/screens/home/widgets/draw_view.dart';
 import 'package:paint/presentation/theme/app_typography.dart';
 import 'package:paint/presentation/widgets/app_icon_button.dart';
-import 'package:paint/presentation/widgets/app_text_button.dart';
+import 'package:stacked/stacked.dart';
 
 import 'home_vm.dart';
 import 'widgets/draw_tools.dart';
@@ -49,6 +46,7 @@ class HomeView extends StatelessWidget {
                     ),
                     const SizedBox(width: 10),
                     AppIconButton(
+                      onTap: () => model.pickImage(context),
                       icon: Assets.icons.add,
                       iconColor: ColorName.green,
                       iconSize: 22,

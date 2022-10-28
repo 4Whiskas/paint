@@ -1,3 +1,5 @@
+import 'package:advance_image_picker/advance_image_picker.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_drawing_board/flutter_drawing_board.dart';
@@ -10,6 +12,7 @@ import 'dialogs/select_color_dialog.dart';
 class HomeViewModel extends BaseViewModel {
   final DrawingController drawingController = DrawingController();
   Color selectedColor = ColorName.black;
+  String? selectedImagePath;
 
   PaintTool selectedTool = PaintTool.pencil;
   double selectedWidth = 2;
@@ -22,8 +25,27 @@ class HomeViewModel extends BaseViewModel {
     );
   }
 
-  Future<void> pickImage() async {
-    
+  Future<void> pickImage(BuildContext context) async {
+    var configs = ImagePickerConfigs();
+    configs.appBarTextColor = Colors.black;
+    configs.stickerFeatureEnabled = false;
+    configs.translateFunc = (name, value) => Intl.message(
+          value,
+          name: name,
+        );
+    List<ImageObject> objects = await Navigator.of(context).push(
+      PageRouteBuilder(
+        pageBuilder: (context, animation, __) {
+          return ImagePicker(
+            maxCount: 1,
+            configs: configs,
+          );
+        },
+      ),
+    );
+
+    selectedImagePath = objects.first.modifiedPath;
+    notifyListeners();
   }
 
   void rollBack() => drawingController.undo();
