@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:template/gen/colors.gen.dart';
+import 'package:paint/gen/colors.gen.dart';
 
 import '../abstract/table_item.dart';
 

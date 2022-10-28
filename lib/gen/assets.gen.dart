@@ -73,18 +73,59 @@ class $AssetsFontsGen {
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/add.svg
+  SvgGenImage get add => const SvgGenImage('assets/icons/add.svg');
+
+  /// File path: assets/icons/brush.svg
+  SvgGenImage get brush => const SvgGenImage('assets/icons/brush.svg');
+
+  /// File path: assets/icons/clear.svg
+  SvgGenImage get clear => const SvgGenImage('assets/icons/clear.svg');
+
   /// File path: assets/icons/dropdown_arrow.svg
   SvgGenImage get dropdownArrow =>
       const SvgGenImage('assets/icons/dropdown_arrow.svg');
 
+  /// File path: assets/icons/eraser.svg
+  SvgGenImage get eraser => const SvgGenImage('assets/icons/eraser.svg');
+
+  /// File path: assets/icons/faceid.svg
+  SvgGenImage get faceid => const SvgGenImage('assets/icons/faceid.svg');
+
   /// File path: assets/icons/filter.svg
   SvgGenImage get filter => const SvgGenImage('assets/icons/filter.svg');
+
+  /// File path: assets/icons/pencil.svg
+  SvgGenImage get pencil => const SvgGenImage('assets/icons/pencil.svg');
+
+  /// File path: assets/icons/rollBack.svg
+  SvgGenImage get rollBack => const SvgGenImage('assets/icons/rollBack.svg');
+
+  /// File path: assets/icons/rollForward.svg
+  SvgGenImage get rollForward =>
+      const SvgGenImage('assets/icons/rollForward.svg');
 
   /// File path: assets/icons/search.svg
   SvgGenImage get search => const SvgGenImage('assets/icons/search.svg');
 
+  /// File path: assets/icons/touchid.svg
+  SvgGenImage get touchid => const SvgGenImage('assets/icons/touchid.svg');
+
   /// List of all assets
-  List<SvgGenImage> get values => [dropdownArrow, filter, search];
+  List<SvgGenImage> get values => [
+        add,
+        brush,
+        clear,
+        dropdownArrow,
+        eraser,
+        faceid,
+        filter,
+        pencil,
+        rollBack,
+        rollForward,
+        search,
+        touchid
+      ];
 }
 
 class $AssetsImagesGen {

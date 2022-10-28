@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:template/gen/colors.gen.dart';
-import 'package:template/presentation/app/app.dart';
+import 'package:paint/gen/colors.gen.dart';
+import 'package:paint/presentation/app/app.dart';
 
 class AppBackButton extends StatelessWidget {
   const AppBackButton({

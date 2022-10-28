@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
-import 'package:template/presentation/theme/app_typography.dart';
+import 'package:paint/presentation/theme/app_typography.dart';
 
 class AppTextButton extends StatelessWidget {
   const AppTextButton({
     Key? key,
-    required this.onTap,
     required this.text,
+    this.onTap,
     this.textStyle,
   }) : super(key: key);
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final String text;
   final TextStyle? textStyle;
 

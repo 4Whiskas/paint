@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:template/gen/assets.gen.dart';
-import 'package:template/presentation/theme/app_typography.dart';
+import 'package:paint/gen/assets.gen.dart';
+import 'package:paint/presentation/theme/app_typography.dart';
 
 class AppButton extends StatelessWidget {
   const AppButton({

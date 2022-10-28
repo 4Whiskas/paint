@@ -1,19 +1,23 @@
 import 'package:flutter/cupertino.dart';
-import 'package:template/gen/assets.gen.dart';
+import 'package:paint/gen/assets.gen.dart';
 
 class AppIconButton extends StatelessWidget {
   const AppIconButton({
     Key? key,
     this.onTap,
-    required this.icon,
+    this.icon,
     this.iconColor,
     this.buttonColor,
+    this.iconSize,
+    this.iconWidget,
   }) : super(key: key);
 
   final VoidCallback? onTap;
-  final SvgGenImage icon;
+  final SvgGenImage? icon;
   final Color? iconColor;
   final Color? buttonColor;
+  final double? iconSize;
+  final Widget? iconWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +27,12 @@ class AppIconButton extends StatelessWidget {
       minSize: 0,
       color: buttonColor,
       borderRadius: BorderRadius.circular(12),
-      child: icon.svg(color: iconColor),
+      child: iconWidget ??
+          icon!.svg(
+            color: iconColor,
+            width: iconSize,
+            height: iconSize,
+          ),
     );
   }
 }

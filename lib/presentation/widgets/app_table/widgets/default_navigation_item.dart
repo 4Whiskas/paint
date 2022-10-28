@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:template/presentation/theme/app_typography.dart';
+import 'package:paint/presentation/theme/app_typography.dart';
 
 import '../abstract/table_item.dart';
 

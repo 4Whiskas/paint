@@ -1,6 +1,4 @@
-# template
-
-template project
+# Paint
 
 # Commands
 
@@ -11,8 +9,3 @@ template project
 
 * other builder
 * * flutter packages pub run build_runner build --delete-conflicting-outputs
-
-<!-- * model builder
-* * curl https://gramm.sbeusilent.space/swagger/v1/swagger.json --output lib/data/swagger/swagger.json
-* * flutter packages pub run build_runner build --delete-conflicting-outputs
-samples, guidance on mobile development, and a full API reference. -->

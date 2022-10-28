@@ -26,7 +26,7 @@ class _$AppRouter extends RootStackRouter {
       return CustomPage<dynamic>(
         routeData: routeData,
         child: const AuthView(),
-        transitionsBuilder: fadeInTransition,
+        transitionsBuilder: TransitionsBuilders.slideRightWithFade,
         opaque: true,
         barrierDismissible: false,
       );
@@ -35,7 +35,7 @@ class _$AppRouter extends RootStackRouter {
       return CustomPage<dynamic>(
         routeData: routeData,
         child: const HomeView(),
-        transitionsBuilder: fadeInTransition,
+        transitionsBuilder: TransitionsBuilders.slideRightWithFade,
         opaque: true,
         barrierDismissible: false,
       );

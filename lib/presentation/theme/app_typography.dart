@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:template/gen/fonts.gen.dart';
+import 'package:paint/gen/fonts.gen.dart';
 export 'text_extensions.dart';
 
 class AppTypography {

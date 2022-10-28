@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:template/gen/assets.gen.dart';
-import 'package:template/gen/colors.gen.dart';
-import 'package:template/presentation/theme/app_typography.dart';
-import 'package:template/presentation/widgets/app_button.dart';
-import 'package:template/presentation/widgets/app_card.dart';
+import 'package:paint/gen/assets.gen.dart';
+import 'package:paint/gen/colors.gen.dart';
+import 'package:paint/presentation/theme/app_typography.dart';
+import 'package:paint/presentation/widgets/app_button.dart';
+import 'package:paint/presentation/widgets/app_card.dart';
 
 import 'abstract/searched_table_item.dart';
 import 'models/app_table_element.dart';

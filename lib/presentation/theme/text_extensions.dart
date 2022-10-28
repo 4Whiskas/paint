@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:template/gen/colors.gen.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:paint/gen/colors.gen.dart';
 
 extension AppTextExtensions on TextStyle {
   //Colors
@@ -10,6 +10,8 @@ extension AppTextExtensions on TextStyle {
   TextStyle get lightGrey => copyWith(color: ColorName.lightGrey);
   TextStyle get green => copyWith(color: ColorName.green);
   TextStyle get red => copyWith(color: ColorName.red);
+  TextStyle get cupertinoBlue => copyWith(color: CupertinoColors.activeBlue);
+  TextStyle get cupertinoGreen => copyWith(color: CupertinoColors.activeGreen);
 
   //Weights
   TextStyle get w100 => copyWith(fontWeight: FontWeight.w100);

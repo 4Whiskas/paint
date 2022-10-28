@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:template/gen/locale_keys.g.dart';
-import 'package:template/presentation/theme/app_typography.dart';
-import 'package:template/presentation/widgets/app_text_button.dart';
+import 'package:paint/gen/locale_keys.g.dart';
+import 'package:paint/presentation/theme/app_typography.dart';
+import 'package:paint/presentation/widgets/app_text_button.dart';
 
 class ErrorService {
   ErrorService(this._appContext);

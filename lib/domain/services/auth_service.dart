@@ -1,27 +1,49 @@
-import 'package:flutter/cupertino.dart';
-import 'package:template/data/data_sources/auth/local_auth_ds.dart';
-import 'package:template/data/data_sources/auth/remote_auth_ds.dart';
-import 'package:template/data/models/models.dart';
-import 'package:template/domain/services/core/app_service.dart';
-import 'package:template/presentation/app/app.dart';
-import 'package:template/presentation/navigation/app_router.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/services.dart';
+import 'package:local_auth/local_auth.dart';
+import 'package:paint/data/data_sources/auth/local_auth_ds.dart';
+import 'package:paint/data/data_sources/core/app_remote_ds.dart';
+import 'package:paint/domain/services/core/app_service.dart';
+import 'package:paint/gen/locale_keys.g.dart';
+import 'package:paint/presentation/app/app.dart';
+import 'package:paint/presentation/navigation/app_router.dart';
 
-class AuthService
-    extends AppService<LocalAuthDataSource, RemoteAuthDataSource> {
+class AuthService extends AppService<LocalAuthDataSource, BaseRemoteDataSource> {
   AuthService(super.lds, super.rds, super.errorService);
 
+  final LocalAuthentication _localAuthentication = LocalAuthentication();
+
+  // ignore: prefer_final_fields
+  List<BiometricType> _availableBiometrics = [];
+
+  List<BiometricType> get availableBiometrics => _availableBiometrics;
+
   @override
-  Future<void> init(BuildContext context) async {
+  Future<void> init() async {
     LocalAuthDataSource.authState.addListener(authStateListener);
+    await lds.checkPassword();
+    if (!(await _localAuthentication.canCheckBiometrics)) return;
+    _availableBiometrics = await _localAuthentication.getAvailableBiometrics();
   }
 
-  Future<void> login(SignInDto dto) async {
-    final res = await rds.sigIn(dto);
-    if (res.isSuccessful && res.body == null) {
-      lds.saveToken(res.body!);
-    } else {
-      errorService.showEror();
+  Future<void> login(String password) async {
+    await lds.checkPassword(password: password);
+  }
+
+  Future<void> loginViaBiometrics() async {
+    if (!(_availableBiometrics.contains(BiometricType.face) || _availableBiometrics.contains(BiometricType.fingerprint))) return;
+    try {
+      final res = await _localAuthentication.authenticate(
+        localizedReason: LocaleKeys.authReason.tr(),
+      );
+      await lds.checkPassword(forceAuth: res);
+    } on PlatformException catch (e) {
+      await errorService.showEror(error: e.message);
     }
+  }
+
+  void setPassword(String password) {
+    lds.setPassword(password);
   }
 
   void authStateListener() {
@@ -31,14 +53,12 @@ class AuthService
           const AuthViewRoute(),
         ],
       );
-    } else {
-      if (App.router.current.name == 'AuthViewRoute') {
-        App.router.replaceAll(
-          [
-            const HomeViewRoute(),
-          ],
-        );
-      }
+    } else if (App.router.current.name == AuthViewRoute.name) {
+      App.router.replaceAll(
+        [
+          const HomeViewRoute(),
+        ],
+      );
     }
   }
 
