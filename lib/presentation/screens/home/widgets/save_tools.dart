@@ -27,29 +27,9 @@ class SaveTools extends ViewModelWidget<HomeViewModel> {
         SizedBox(
           width: MediaQuery.of(context).size.width,
           height: 40,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Expanded(
-                child: AppTextButton(
-                  onTap: viewModel.saveToLocal,
-                  text: LocaleKeys.save.tr(),
-                ),
-              ),
-              const SizedBox(
-                width: 1,
-                height: double.infinity,
-                child: ColoredBox(
-                  color: ColorName.darkGrey,
-                ),
-              ),
-              Expanded(
-                child: AppTextButton(
-                  onTap: () {},
-                  text: LocaleKeys.saveAll.tr(),
-                ),
-              ),
-            ],
+          child: AppTextButton(
+            onTap: viewModel.saveToLocal,
+            text: LocaleKeys.save.tr(),
           ),
         ),
         const SizedBox(

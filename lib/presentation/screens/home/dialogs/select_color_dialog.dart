@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_hsvcolor_picker/flutter_hsvcolor_picker.dart';
 import 'package:paint/gen/colors.gen.dart';
 import 'package:paint/gen/locale_keys.g.dart';
@@ -15,6 +14,7 @@ class SelectColorDialog extends StatefulWidget {
   final Color inputColor;
 
   @override
+  // ignore: library_private_types_in_public_api
   _SelectColorDialogState createState() => _SelectColorDialogState();
 }
 

@@ -17,5 +17,8 @@ abstract class  LocaleKeys {
   static const selectColor = 'selectColor';
   static const accept = 'accept';
   static const authReason = 'authReason';
+  static const setPassword = 'setPassword';
+  static const enterPassword = 'enterPassword';
+  static const wrongPassword = 'wrongPassword';
 
 }

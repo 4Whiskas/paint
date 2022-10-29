@@ -8,11 +8,13 @@ class PinButton extends StatelessWidget {
     required this.onTap,
     this.child,
     this.text,
+    this.textColor,
   }) : super(key: key);
 
   final VoidCallback onTap;
   final Widget? child;
   final String? text;
+  final Color? textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class PinButton extends StatelessWidget {
         child: child ??
             Text(
               text ?? '',
-              style: AppTypography.sf.w500.s18.black,
+              style: AppTypography.sf.w500.s18.black.copyWith(color: textColor),
             ),
       ),
     );

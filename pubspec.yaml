@@ -62,7 +62,7 @@ dependencies:
   flutter_hsvcolor_picker: ^1.2.3
   path_provider: ^2.0.11
   uuid: ^3.0.6
-  fling_pickle: ^0.4.1
+  gallery_saver: ^2.3.2
 
 dev_dependencies:
   flutter_test:

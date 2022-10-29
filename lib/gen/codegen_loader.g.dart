@@ -1,6 +1,6 @@
 // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
 
-// ignore_for_file: prefer_single_quotes
+// ignore_for_file: prefer_single_quotes, avoid_renaming_method_parameters
 
 import 'dart:ui';
 
@@ -16,21 +16,24 @@ class CodegenLoader extends AssetLoader{
 
   static const Map<String,dynamic> en = {
   "appName": "Paint",
-  "skip": "Пропустить",
-  "logout": "Выйти из приложения",
-  "cancel": "Отмена",
-  "save": "Сохранить",
-  "saveAll": "Сохранить все",
-  "left": "Остаться",
-  "yes": "Да",
-  "no": "Нет",
-  "camera": "Камера",
-  "gallery": "Галлерея",
-  "error": "Ошибка",
-  "unhadledError": "Необработанное исключение",
-  "selectColor": "Выбрать цвет кисти",
-  "accept": "Применить",
-  "authReason": "Так будет проще разблокировать приложение"
+  "skip": "Skip",
+  "logout": "Logout",
+  "cancel": "Cancel",
+  "save": "Save",
+  "saveAll": "Save all",
+  "left": "Stay",
+  "yes": "Yes",
+  "no": "No",
+  "camera": "Camera",
+  "gallery": "Gallery",
+  "error": "Error",
+  "unhadledError": "Unhandled error",
+  "selectColor": "Select brush color",
+  "accept": "Accept",
+  "authReason": "This will make it easier to unlock the app",
+  "setPassword": "Set a password for the security of your data",
+  "enterPassword": "Enter your password to log in to the app",
+  "wrongPassword": "Invalid password"
 };
 static const Map<String,dynamic> ru = {
   "appName": "Paint",
@@ -48,7 +51,10 @@ static const Map<String,dynamic> ru = {
   "unhadledError": "Необработанное исключение",
   "selectColor": "Выбрать цвет кисти",
   "accept": "Применить",
-  "authReason": "Так будет проще разблокировать приложение"
+  "authReason": "Так будет проще разблокировать приложение",
+  "setPassword": "Установите пароль для безопасности ваших данных",
+  "enterPassword": "Введите пароль чтобы войти в приложение",
+  "wrongPassword": "Неверный пароль"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "ru": ru};
 }

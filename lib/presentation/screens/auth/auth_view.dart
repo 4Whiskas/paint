@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:paint/gen/locale_keys.g.dart';
 import 'package:pinput/pinput.dart';
 import 'package:stacked/stacked.dart';
 import 'package:paint/domain/di/global_dependency.dart';
@@ -34,6 +34,20 @@ class AuthView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
+                Text(
+                  model.hasAccount ? LocaleKeys.enterPassword.tr() : LocaleKeys.setPassword.tr(),
+                  style: AppTypography.sf.s24.w500.black,
+                  textAlign: TextAlign.center,
+                ),
+                if (!model.successLogin) ...[
+                  const SizedBox(height: 5),
+                  Text(
+                    LocaleKeys.wrongPassword.tr(),
+                    textAlign: TextAlign.center,
+                    style: AppTypography.sf.s18.w400.red,
+                  ),
+                ],
+                const SizedBox(height: 30),
                 Pinput(
                   controller: model.pinController,
                   onCompleted: model.onPinFilled,
@@ -44,7 +58,9 @@ class AuthView extends StatelessWidget {
                     height: 70,
                     width: 70,
                     textStyle: model.pinController.text.length == 4
-                        ? AppTypography.sf.cupertinoGreen.w600.s20
+                        ? model.successLogin
+                            ? AppTypography.sf.cupertinoGreen.w600.s20
+                            : AppTypography.sf.red.w600.s20
                         : AppTypography.sf.cupertinoBlue.w600.s20,
                     decoration: const BoxDecoration(
                       border: Border(
@@ -97,6 +113,7 @@ class AuthView extends StatelessWidget {
                         PinButton(
                           onTap: model.cancelInput,
                           text: 'C',
+                          textColor: ColorName.red,
                         ),
                       ],
                     ),

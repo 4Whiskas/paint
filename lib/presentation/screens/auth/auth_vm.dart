@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:paint/data/data_sources/auth/local_auth_ds.dart';
 import 'package:stacked/stacked.dart';
 import 'package:paint/domain/services/auth_service.dart';
 
@@ -13,6 +14,9 @@ class AuthViewModel extends BaseViewModel {
 
   bool faceIdAvailavle = false;
   bool touchIdAvailable = false;
+  bool successLogin = true;
+
+  bool get hasAccount => authService.authState != AuthState.passwordNotSet;
 
   Future<void> onReady() async {
     await authService.init();
@@ -22,12 +26,21 @@ class AuthViewModel extends BaseViewModel {
   }
 
   Future<void> onPinFilled(String res) async {
+    successLogin = false;
     notifyListeners();
-    await authService.login(res);
+    if (authService.authState == AuthState.passwordNotSet) {
+      setPassword(res);
+    }
+    successLogin = await authService.login(res);
+    notifyListeners();
   }
 
   Future<void> authViaBiometric() async {
     await authService.loginViaBiometrics();
+  }
+
+  void setPassword(String pwd) {
+    authService.setPassword(pwd);
   }
 
   void incrementPin(String char) {
@@ -35,6 +48,8 @@ class AuthViewModel extends BaseViewModel {
   }
 
   void cancelInput() {
+    successLogin = true;
     pinController.clear();
+    notifyListeners();
   }
 }

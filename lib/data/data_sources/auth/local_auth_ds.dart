@@ -2,7 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:paint/data/data_sources/core/app_local_ds.dart';
 
-enum AuthState { authorized, none }
+enum AuthState {
+  authorized,
+  none,
+  passwordNotSet,
+}
 
 class LocalAuthDataSource implements AppLocalDataSource {
   final FlutterSecureStorage _storage = const FlutterSecureStorage();
@@ -18,25 +22,25 @@ class LocalAuthDataSource implements AppLocalDataSource {
     );
   }
 
-  Future<void> checkPassword({
+  Future<bool> checkPassword({
     String? password,
     bool forceAuth = false,
   }) async {
     if (forceAuth) {
       authState.value = AuthState.authorized;
-      return;
+      return true;
     }
     final res = await _storage.read(key: _tokenKey);
     if (res == null) {
-      authState.value = AuthState.authorized;
-      return;
+      authState.value = AuthState.passwordNotSet;
+      return true;
     }
     if (res == password) {
       authState.value = AuthState.authorized;
-      return;
+      return true;
     }
     authState.value = AuthState.none;
-    return;
+    return false;
   }
 
   Future<void> removeToken() => _storage.deleteAll();

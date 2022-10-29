@@ -6,16 +6,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_drawing_board/flutter_drawing_board.dart';
+import 'package:paint/domain/services/gallery_service.dart';
 import 'package:paint/gen/colors.gen.dart';
 import 'package:paint/presentation/screens/home/enums/paint_tool.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:stacked/stacked.dart';
-import 'package:uuid/uuid.dart';
 
 import 'dialogs/select_color_dialog.dart';
 
 class HomeViewModel extends BaseViewModel {
+  HomeViewModel(this.galleryService);
+
+  final GalleryService galleryService;
   final DrawingController drawingController = DrawingController();
+  final configs = ImagePickerConfigs();
   Color selectedColor = ColorName.black;
   String? selectedImagePath;
   File? selectedImage;
@@ -25,22 +28,14 @@ class HomeViewModel extends BaseViewModel {
   double selectedWidth = 2;
 
   Future<void> onReady() async {
-    //drawingController.currentContent.draw(Canvas(), size, deeper)
     drawingController.setStyle(
       color: selectedColor,
       strokeWidth: selectedWidth,
     );
-    
+    initImagePickerConfigs();
   }
 
   Future<void> pickImage(BuildContext context) async {
-    var configs = ImagePickerConfigs();
-    configs.appBarTextColor = Colors.black;
-    configs.stickerFeatureEnabled = false;
-    configs.translateFunc = (name, value) => Intl.message(
-          value,
-          name: name,
-        );
     List<ImageObject> objects = await Navigator.of(context).push(
       PageRouteBuilder(
         pageBuilder: (context, animation, __) {
@@ -70,22 +65,27 @@ class HomeViewModel extends BaseViewModel {
   }
 
   Future<void> saveToLocal() async {
-    final drawingBytes = (await drawingController.getImageData())!.buffer.asUint8List();
-    Uint8List newImage = Uint8List.fromList([
-      ...drawingBytes,
-      ...selectedImageBytes ?? [],
-    ]);
-    final dir = await getExternalStorageDirectory();
-    if (dir == null) return;
-    const uuid = Uuid();
-    final file = File('${dir.path}${uuid.v4()}.jpg');
-    await file.writeAsBytes(newImage);
+    await galleryService.saveImage(
+      art: await drawingController.getImageData(),
+      image: selectedImageBytes,
+    );
   }
 
   Future<void> saveToHive() async {}
 
+  void initImagePickerConfigs() {
+    configs.appBarTextColor = Colors.black;
+    configs.stickerFeatureEnabled = false;
+    configs.translateFunc = (name, value) => Intl.message(
+          value,
+          name: name,
+        );
+  }
+
   void rollBack() => drawingController.undo();
+
   void rollForward() => drawingController.redo();
+
   void selectPencil() {
     drawingController.setPaintContent = SimpleLine();
     selectedTool = PaintTool.pencil;
