@@ -10,6 +10,7 @@ import 'package:paint/gen/colors.gen.dart';
 import 'package:paint/presentation/screens/home/enums/paint_tool.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:stacked/stacked.dart';
+import 'package:uuid/uuid.dart';
 
 import 'dialogs/select_color_dialog.dart';
 
@@ -68,15 +69,15 @@ class HomeViewModel extends BaseViewModel {
   }
 
   Future<void> saveToLocal() async {
-    if (selectedImage == null) return;
     final drawingBytes = (await drawingController.getImageData())!.buffer.asUint8List();
     Uint8List newImage = Uint8List.fromList([
       ...drawingBytes,
-      ...selectedImageBytes!,
+      ...selectedImageBytes ?? [],
     ]);
     final dir = await getExternalStorageDirectory();
     if (dir == null) return;
-    final file = File('${dir.path}(modified).jpg');
+    const uuid = Uuid();
+    final file = File('${dir.path}${uuid.v4()}.jpg');
     await file.writeAsBytes(newImage);
 
     //await xFile.saveTo('${dir?.path}modified.jpg');
