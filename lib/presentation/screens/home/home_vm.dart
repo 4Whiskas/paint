@@ -30,6 +30,7 @@ class HomeViewModel extends BaseViewModel {
       color: selectedColor,
       strokeWidth: selectedWidth,
     );
+    
   }
 
   Future<void> pickImage(BuildContext context) async {
@@ -79,8 +80,6 @@ class HomeViewModel extends BaseViewModel {
     const uuid = Uuid();
     final file = File('${dir.path}${uuid.v4()}.jpg');
     await file.writeAsBytes(newImage);
-
-    //await xFile.saveTo('${dir?.path}modified.jpg');
   }
 
   Future<void> saveToHive() async {}
