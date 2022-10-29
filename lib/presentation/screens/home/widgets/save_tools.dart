@@ -32,7 +32,7 @@ class SaveTools extends ViewModelWidget<HomeViewModel> {
             children: [
               Expanded(
                 child: AppTextButton(
-                  onTap: () {},
+                  onTap: viewModel.saveToLocal,
                   text: LocaleKeys.save.tr(),
                 ),
               ),

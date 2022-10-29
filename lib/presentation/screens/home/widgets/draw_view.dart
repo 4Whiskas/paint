@@ -12,7 +12,9 @@ class DrawView extends ViewModelWidget<HomeViewModel> {
       onPanStart: (dsd) {},
       onPanEnd: (ded) {},
       onPanUpdate: (dud) {},
-      background: Container(width: 400, height: 400, color: Colors.white),
+      background: viewModel.selectedImage == null
+          ? Container(width: 400, height: 400, color: Colors.white)
+          : Image.file(viewModel.selectedImage!),
       controller: viewModel.drawingController,
     );
   }
