@@ -21,5 +21,9 @@
     "chooseImageSource": "Choose from where to choose an image",
     "saveSuccess": "Successfully saved",
     "beforeAfter": "Before/After",
-    "nice": "Nice!"
+    "nice": "Nice!",
+    "rollBack": "Undo the last one drawn",
+    "rollForward": "Return the canceled drawn",
+    "addPicture": "Add Photo",
+    "rollBackFilters": "Cancel filter actions (ignores the drawing)"
 }

@@ -24,5 +24,9 @@ abstract class  LocaleKeys {
   static const saveSuccess = 'saveSuccess';
   static const beforeAfter = 'beforeAfter';
   static const nice = 'nice';
+  static const rollBack = 'rollBack';
+  static const rollForward = 'rollForward';
+  static const addPicture = 'addPicture';
+  static const rollBackFilters = 'rollBackFilters';
 
 }

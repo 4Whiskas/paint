@@ -37,40 +37,60 @@ class HomeView extends StatelessWidget {
             appBar: AppBar(
               leading: model.originalImageBytes == null
                   ? null
-                  : AppIconButton(
-                      onTap: () => model.showDifference(context),
-                      iconWidget: const Icon(CupertinoIcons.arrow_2_circlepath),
+                  : Tooltip(
+                      message: LocaleKeys.beforeAfter.tr(),
+                      triggerMode: TooltipTriggerMode.longPress,
+                      child: AppIconButton(
+                        onTap: () => model.showDifference(context),
+                        iconWidget: const Icon(CupertinoIcons.arrow_2_circlepath),
+                      ),
                     ),
               title: Text(
                 LocaleKeys.appName.tr(),
                 style: AppTypography.sf.s22.w500.black,
               ),
               actions: [
-                AppIconButton(
-                  icon: Assets.icons.rollBack,
-                  onTap: model.rollBack,
-                  iconSize: 22,
+                Tooltip(
+                  message: LocaleKeys.rollBack.tr(),
+                  triggerMode: TooltipTriggerMode.longPress,
+                  child: AppIconButton(
+                    icon: Assets.icons.rollBack,
+                    onTap: model.rollBack,
+                    iconSize: 22,
+                  ),
                 ),
                 const SizedBox(width: 10),
-                AppIconButton(
-                  icon: Assets.icons.rollForward,
-                  onTap: model.rollForward,
-                  iconSize: 22,
+                Tooltip(
+                  message: LocaleKeys.rollForward.tr(),
+                  triggerMode: TooltipTriggerMode.longPress,
+                  child: AppIconButton(
+                    icon: Assets.icons.rollForward,
+                    onTap: model.rollForward,
+                    iconSize: 22,
+                  ),
                 ),
                 const SizedBox(width: 10),
-                AppIconButton(
-                  onTap: () => model.pickImage(context),
-                  icon: Assets.icons.add,
-                  iconColor: ColorName.green,
-                  iconSize: 22,
+                Tooltip(
+                  message: LocaleKeys.addPicture.tr(),
+                  triggerMode: TooltipTriggerMode.longPress,
+                  child: AppIconButton(
+                    onTap: () => model.pickImage(context),
+                    icon: Assets.icons.add,
+                    iconColor: ColorName.green,
+                    iconSize: 22,
+                  ),
                 ),
                 const SizedBox(width: 10),
                 if (model.selectedImageBytes != null) ...[
-                  AppIconButton(
-                    onTap: model.resetImage,
-                    icon: Assets.icons.reset,
-                    iconColor: ColorName.red,
-                    iconSize: 22,
+                  Tooltip(
+                    message: LocaleKeys.rollBackFilters.tr(),
+                    triggerMode: TooltipTriggerMode.longPress,
+                    child: AppIconButton(
+                      onTap: model.resetImage,
+                      icon: Assets.icons.reset,
+                      iconColor: ColorName.red,
+                      iconSize: 22,
+                    ),
                   ),
                   const SizedBox(width: 10),
                 ]
