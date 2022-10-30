@@ -28,3 +28,7 @@
 Команды для генерации остальных автогенриуемых файлов, ресурсов
 
 * flutter packages pub run build_runner build --delete-conflicting-outputs
+
+# Контакты
+
+* Telegram - https://t.me/whiskas44
