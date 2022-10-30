@@ -90,13 +90,10 @@ class AuthView extends StatelessWidget {
                           text: (index + 1).toString(),
                         ),
                       ...[
-                        if (model.faceIdAvailavle || model.touchIdAvailable)
-                          PinButton(
-                            onTap: () => model.incrementPin('0'),
-                            child: model.faceIdAvailavle ? Assets.icons.faceid.svg() : Assets.icons.touchid.svg(),
-                          )
-                        else
-                          const SizedBox(),
+                        PinButton(
+                          onTap: model.authViaBiometric,
+                          child: Assets.icons.faceid.svg(),
+                        ),
                         PinButton(
                           text: '0',
                           onTap: () => model.incrementPin('0'),

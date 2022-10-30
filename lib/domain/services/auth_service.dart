@@ -13,19 +13,12 @@ class AuthService extends AppService<LocalAuthDataSource, BaseRemoteDataSource> 
 
   final LocalAuthentication _localAuthentication = LocalAuthentication();
 
-  // ignore: prefer_final_fields
-  List<BiometricType> _availableBiometrics = [];
-
-  List<BiometricType> get availableBiometrics => _availableBiometrics;
-
   AuthState get authState => LocalAuthDataSource.authState.value;
 
   @override
   Future<void> init() async {
     LocalAuthDataSource.authState.addListener(authStateListener);
     await lds.checkPassword();
-    if (!(await _localAuthentication.canCheckBiometrics)) return;
-    _availableBiometrics = await _localAuthentication.getAvailableBiometrics();
   }
 
   Future<bool> login(String password) async {
@@ -33,13 +26,14 @@ class AuthService extends AppService<LocalAuthDataSource, BaseRemoteDataSource> 
   }
 
   Future<void> loginViaBiometrics() async {
-    if (!(_availableBiometrics.contains(BiometricType.face) ||
-        _availableBiometrics.contains(BiometricType.fingerprint))) return;
     try {
       final res = await _localAuthentication.authenticate(
         localizedReason: LocaleKeys.authReason.tr(),
+        options: const AuthenticationOptions(biometricOnly: true),
       );
-      await lds.checkPassword(forceAuth: res);
+      if (res == true) {
+        await lds.checkPassword(forceAuth: res);
+      }
     } on PlatformException catch (e) {
       await errorService.showEror(error: e.message);
     }

@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:local_auth/local_auth.dart';
 import 'package:paint/data/data_sources/auth/local_auth_ds.dart';
 import 'package:stacked/stacked.dart';
 import 'package:paint/domain/services/auth_service.dart';
@@ -11,23 +10,12 @@ class AuthViewModel extends BaseViewModel {
 
   final AuthService authService;
   final TextEditingController pinController = TextEditingController();
-  final List<List<String>> actionTitles = [
-    ['1', '2', '3'],
-    ['4', '5', '6'],
-    ['7', '8', '9'],
-    ['F', '0', 'C']
-  ];
-
-  bool faceIdAvailavle = false;
-  bool touchIdAvailable = false;
   bool successLogin = true;
 
   bool get hasAccount => authService.authState != AuthState.passwordNotSet;
 
   Future<void> onReady() async {
     await authService.init();
-    faceIdAvailavle = authService.availableBiometrics.contains(BiometricType.face);
-    touchIdAvailable = authService.availableBiometrics.contains(BiometricType.fingerprint);
     notifyListeners();
   }
 
