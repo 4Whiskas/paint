@@ -46,4 +46,10 @@ class AuthViewModel extends BaseViewModel {
     pinController.clear();
     notifyListeners();
   }
+
+  @override
+  void dispose() {
+    pinController.dispose();
+    super.dispose();
+  }
 }

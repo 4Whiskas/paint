@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_drawing_board/flutter_drawing_board.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_editor/image_editor.dart';
 import 'package:image_picker/image_picker.dart' as picker;
 import 'package:paint/domain/services/error_service.dart';
@@ -47,6 +48,7 @@ class HomeViewModel extends BaseViewModel {
   Option blueOption = ColorOption();
   Color selectedColor = ColorName.black;
   Uint8List? selectedImageBytes;
+  String? selectedImagePath;
   Uint8List? originalImageBytes;
   List<ImageFilterModel> filters = [];
   PaintTool selectedTool = PaintTool.pencil;
@@ -73,6 +75,7 @@ class HomeViewModel extends BaseViewModel {
     if (res == null) return;
     final image = await picker.ImagePicker.platform.pickImage(source: res);
     if (image == null) return;
+    selectedImagePath = image.path;
     final selectedImage = File(image.path);
     selectedImageBytes = await selectedImage.readAsBytes();
     originalImageBytes = selectedImageBytes;
@@ -276,6 +279,37 @@ class HomeViewModel extends BaseViewModel {
   void setBrushWidth(double width) {
     drawingController.setStyle(strokeWidth: width);
     selectedWidth = width;
+    notifyListeners();
+  }
+
+  Future<void> cropImage() async {
+    if (selectedImagePath == null) {
+      errorService.showEror();
+      return;
+    }
+    final res = await ImageCropper().cropImage(
+      sourcePath: selectedImagePath!,
+      aspectRatioPresets: [
+        CropAspectRatioPreset.square,
+        CropAspectRatioPreset.ratio3x2,
+        CropAspectRatioPreset.original,
+        CropAspectRatioPreset.ratio4x3,
+        CropAspectRatioPreset.ratio16x9
+      ],
+      uiSettings: [
+        AndroidUiSettings(
+            toolbarTitle: LocaleKeys.cropper.tr(),
+            toolbarColor: ColorName.blue,
+            toolbarWidgetColor: Colors.white,
+            initAspectRatio: CropAspectRatioPreset.original,
+            lockAspectRatio: false),
+        IOSUiSettings(
+          title: LocaleKeys.cropper.tr(),
+        ),
+      ],
+    );
+    if (res == null) return;
+    selectedImageBytes = await res.readAsBytes();
     notifyListeners();
   }
 

@@ -25,5 +25,6 @@
     "rollBack": "Undo the last one drawn",
     "rollForward": "Return the canceled drawn",
     "addPicture": "Add Photo",
-    "rollBackFilters": "Cancel filter actions (ignores the drawing)"
+    "rollBackFilters": "Cancel filter actions (ignores the drawing)",
+    "cropper":"Image cropper"
 }

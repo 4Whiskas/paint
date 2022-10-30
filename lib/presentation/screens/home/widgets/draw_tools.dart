@@ -137,6 +137,16 @@ class DrawTools extends ViewModelWidget<HomeViewModel> {
                             iconColor: ColorName.black,
                           ),
                         ),
+                        const SizedBox(width: 5),
+                        SizedBox(
+                          width: 32,
+                          height: 32,
+                          child: AppIconButton(
+                            icon: Assets.icons.crop,
+                            onTap: viewModel.cropImage,
+                            iconColor: ColorName.black,
+                          ),
+                        ),
                       ],
                     ),
                   ]

@@ -1,6 +1,6 @@
 // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
 
-// ignore_for_file: prefer_single_quotes
+// ignore_for_file: prefer_single_quotes, avoid_renaming_method_parameters
 
 import 'dart:ui';
 
@@ -41,7 +41,8 @@ class CodegenLoader extends AssetLoader{
   "rollBack": "Undo the last one drawn",
   "rollForward": "Return the canceled drawn",
   "addPicture": "Add Photo",
-  "rollBackFilters": "Cancel filter actions (ignores the drawing)"
+  "rollBackFilters": "Cancel filter actions (ignores the drawing)",
+  "cropper": "Image cropper"
 };
 static const Map<String,dynamic> ru = {
   "appName": "Paint",
@@ -70,7 +71,8 @@ static const Map<String,dynamic> ru = {
   "rollBack": "Отменить последнее нарисованное",
   "rollForward": "Вернуть отмененное нарисованное",
   "addPicture": "Добавить фото",
-  "rollBackFilters": "Отменить действия фильтров(игнорирует рисунок)"
+  "rollBackFilters": "Отменить действия фильтров(игнорирует рисунок)",
+  "cropper": "Обрезка изображения"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "ru": ru};
 }

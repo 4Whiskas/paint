@@ -36,9 +36,6 @@ dependencies:
   #navigation
   auto_route: ^5.0.2
 
-  #model mapper
-  dart_mappable: ^1.2.0
-
   #local_storage
   flutter_secure_storage: ^6.0.0
 
@@ -56,7 +53,6 @@ dependencies:
 
   #utils
   flutter_svg: ^1.1.5
-  file_picker: ^5.2.1
   image_picker: ^0.8.6
   flutter_hsvcolor_picker: ^1.2.3
   path_provider: ^2.0.11
@@ -74,8 +70,6 @@ dev_dependencies:
   auto_route_generator: ^5.0.2
   flutter_gen_runner:
   build_runner: ^2.2.1
-  dart_mappable_builder: ^1.2.0
-  json_serializable: ^6.5.0
 
 flutter_gen:
   output: lib/gen

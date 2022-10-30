@@ -28,5 +28,6 @@ abstract class  LocaleKeys {
   static const rollForward = 'rollForward';
   static const addPicture = 'addPicture';
   static const rollBackFilters = 'rollBackFilters';
+  static const cropper = 'cropper';
 
 }

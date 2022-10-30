@@ -21,6 +21,11 @@ class AppIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (iconWidget == null && icon == null) {
+      throw AssertionError(
+        'Assertion failed (At least iconWidget must not be null or icon must not be null)',
+      );
+    }
     return CupertinoButton(
       onPressed: onTap,
       padding: const EdgeInsets.all(5),
