@@ -14,7 +14,7 @@ class DrawTools extends ViewModelWidget<HomeViewModel> {
   @override
   Widget build(BuildContext context, HomeViewModel viewModel) {
     return Positioned(
-      bottom: 10,
+      bottom: 10 + MediaQuery.of(context).padding.bottom,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
@@ -54,8 +54,9 @@ class DrawTools extends ViewModelWidget<HomeViewModel> {
                         child: AppIconButton(
                           onTap: viewModel.selectPencil,
                           icon: Assets.icons.pencil,
-                          iconColor:
-                              viewModel.selectedTool == PaintTool.pencil ? CupertinoColors.activeBlue : ColorName.black,
+                          iconColor: viewModel.selectedTool == PaintTool.pencil
+                              ? CupertinoColors.activeBlue
+                              : ColorName.black,
                         ),
                       ),
                       const SizedBox(width: 5),
@@ -65,8 +66,9 @@ class DrawTools extends ViewModelWidget<HomeViewModel> {
                         child: AppIconButton(
                           onTap: viewModel.selectBrush,
                           icon: Assets.icons.brush,
-                          iconColor:
-                              viewModel.selectedTool == PaintTool.brush ? CupertinoColors.activeBlue : ColorName.black,
+                          iconColor: viewModel.selectedTool == PaintTool.brush
+                              ? CupertinoColors.activeBlue
+                              : ColorName.black,
                         ),
                       ),
                       const SizedBox(width: 5),
@@ -76,8 +78,9 @@ class DrawTools extends ViewModelWidget<HomeViewModel> {
                         child: AppIconButton(
                           onTap: viewModel.selectEraser,
                           icon: Assets.icons.eraser,
-                          iconColor:
-                              viewModel.selectedTool == PaintTool.eraser ? CupertinoColors.activeBlue : ColorName.black,
+                          iconColor: viewModel.selectedTool == PaintTool.eraser
+                              ? CupertinoColors.activeBlue
+                              : ColorName.black,
                         ),
                       ),
                       const SizedBox(width: 5),

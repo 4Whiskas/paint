@@ -61,7 +61,6 @@ dependencies:
   image_editor: ^1.1.0
   image_cropper: ^3.0.0
   fluttertoast: ^8.1.1
-  flutter_windowmanager: ^0.2.0
 
 dev_dependencies:
   flutter_test:

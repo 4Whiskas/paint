@@ -73,7 +73,15 @@ class HomeViewModel extends BaseViewModel {
       builder: (context) => const SelectImageSource(),
     );
     if (res == null) return;
-    final image = await picker.ImagePicker.platform.pickImage(source: res);
+    picker.PickedFile? image;
+    try {
+      // ignore: invalid_use_of_visible_for_testing_member
+      image = await picker.ImagePicker.platform.pickImage(source: res);
+    } catch (_) {
+      errorService.showEror();
+      return;
+    }
+
     if (image == null) return;
     selectedImagePath = image.path;
     final selectedImage = File(image.path);
@@ -324,7 +332,8 @@ class HomeViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future<void> flipImage({bool horizontal = false, bool vertical = false}) async {
+  Future<void> flipImage(
+      {bool horizontal = false, bool vertical = false}) async {
     if (selectedImageBytes == null) return;
     final options = ImageEditorOption();
     options.addOption(

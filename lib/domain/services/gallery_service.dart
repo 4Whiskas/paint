@@ -15,8 +15,8 @@ class GalleryService extends AppService<LocalGalleryDataSource, BaseRemoteDataSo
     required ByteData? art,
   }) async {
     final artByteList = art?.buffer.asUint8List();
-    final dir = await getExternalStorageDirectory();
-    if (dir == null || artByteList == null) {
+    final dir = await getApplicationDocumentsDirectory();
+    if (artByteList == null) {
       errorService.showEror();
       return;
     }

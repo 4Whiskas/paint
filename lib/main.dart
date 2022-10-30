@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 
 import 'gen/codegen_loader.g.dart';
 import 'presentation/app/app.dart';
@@ -8,7 +7,6 @@ import 'presentation/app/app.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-  await FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
   runApp(
     EasyLocalization(
       supportedLocales: const [

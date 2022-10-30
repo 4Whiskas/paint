@@ -28,7 +28,7 @@ class AuthView extends StatelessWidget {
               32,
               MediaQuery.of(context).padding.top + 16,
               32,
-              MediaQuery.of(context).padding.bottom,
+              MediaQuery.of(context).padding.bottom + 15,
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -73,7 +73,7 @@ class AuthView extends StatelessWidget {
                 ),
                 ConstrainedBox(
                   constraints: const BoxConstraints(
-                    maxHeight: 420,
+                    maxHeight: 430,
                     maxWidth: 270,
                   ),
                   child: GridView(
