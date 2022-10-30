@@ -1,10 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:paint/domain/di/global_dependency.dart';
 import 'package:paint/domain/di/user_dependency.dart';
 import 'package:paint/gen/assets.gen.dart';
 import 'package:paint/gen/colors.gen.dart';
 import 'package:paint/gen/locale_keys.g.dart';
 import 'package:paint/presentation/screens/home/widgets/draw_view.dart';
+import 'package:paint/presentation/screens/home/widgets/filter_tools.dart';
 import 'package:paint/presentation/theme/app_typography.dart';
 import 'package:paint/presentation/widgets/app_icon_button.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +26,8 @@ class HomeView extends StatelessWidget {
       dispose: (_, value) => value.dispose(),
       builder: (context, child) => ViewModelBuilder<HomeViewModel>.reactive(
         viewModelBuilder: () => HomeViewModel(
-          context.user.galleryService,
+          galleryService: context.user.galleryService,
+          errorService: context.global.errorService,
         ),
         onModelReady: (model) => model.onReady(),
         builder: (context, model, child) {
@@ -55,6 +58,16 @@ class HomeView extends StatelessWidget {
                   iconSize: 22,
                 ),
                 const SizedBox(width: 10),
+                if(model.selectedImageBytes!=null)
+                ...[
+                  AppIconButton(
+                  onTap: model.resetImage,
+                  icon: Assets.icons.reset,
+                  iconColor: ColorName.red,
+                  iconSize: 22,
+                ),
+                  const SizedBox(width: 10),
+                ]
               ],
               bottom: const PreferredSize(
                 preferredSize: Size.fromHeight(40),
@@ -66,6 +79,7 @@ class HomeView extends StatelessWidget {
               children: const [
                 DrawView(),
                 DrawTools(),
+                FilterTools(),
               ],
             ),
           );

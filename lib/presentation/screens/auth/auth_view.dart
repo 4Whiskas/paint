@@ -25,18 +25,18 @@ class AuthView extends StatelessWidget {
         return Scaffold(
           body: Padding(
             padding: EdgeInsets.fromLTRB(
-              16,
-              MediaQuery.of(context).padding.top + 32,
-              16,
-              MediaQuery.of(context).padding.bottom + 36,
+              32,
+              MediaQuery.of(context).padding.top + 16,
+              32,
+              MediaQuery.of(context).padding.bottom,
             ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisSize: MainAxisSize.max,
               children: [
                 Text(
                   model.hasAccount ? LocaleKeys.enterPassword.tr() : LocaleKeys.setPassword.tr(),
-                  style: AppTypography.sf.s24.w500.black,
+                  style: AppTypography.sf.s16.w500.black,
                   textAlign: TextAlign.center,
                 ),
                 if (!model.successLogin) ...[
@@ -44,7 +44,7 @@ class AuthView extends StatelessWidget {
                   Text(
                     LocaleKeys.wrongPassword.tr(),
                     textAlign: TextAlign.center,
-                    style: AppTypography.sf.s18.w400.red,
+                    style: AppTypography.sf.s14.w400.red,
                   ),
                 ],
                 const SizedBox(height: 30),
@@ -71,54 +71,45 @@ class AuthView extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 300,
-                  width: MediaQuery.of(context).size.width - 120,
-                  child: GridView.builder(
+                ConstrainedBox(
+                  constraints: const BoxConstraints(
+                    maxHeight: 420,
+                    maxWidth: 270,
+                  ),
+                  child: GridView(
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
                       crossAxisSpacing: 20,
                       mainAxisSpacing: 20,
                     ),
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: 9,
-                    itemBuilder: (_, index) {
-                      final value = (index + 1).toString();
-                      return PinButton(
-                        onTap: () => model.incrementPin(value),
-                        text: value,
-                      );
-                    },
-                  ),
-                ),
-                const SizedBox(height: 20),
-                Center(
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width - 120,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        if (model.faceIdAvailavle || model.touchIdAvailable) ...[
+                    children: [
+                      for (int index = 0; index < 9; index++)
+                        PinButton(
+                          onTap: () => model.incrementPin((index + 1).toString()),
+                          text: (index + 1).toString(),
+                        ),
+                      ...[
+                        if (model.faceIdAvailavle || model.touchIdAvailable)
                           PinButton(
                             onTap: () => model.incrementPin('0'),
                             child: model.faceIdAvailavle ? Assets.icons.faceid.svg() : Assets.icons.touchid.svg(),
-                          ),
-                          const SizedBox(width: 20),
-                        ],
+                          )
+                        else
+                          const SizedBox(),
                         PinButton(
                           text: '0',
                           onTap: () => model.incrementPin('0'),
                         ),
-                        const SizedBox(width: 20),
                         PinButton(
                           onTap: model.cancelInput,
                           text: 'C',
                           textColor: ColorName.red,
                         ),
                       ],
-                    ),
+                    ],
                   ),
-                )
+                ),
               ],
             ),
           ),

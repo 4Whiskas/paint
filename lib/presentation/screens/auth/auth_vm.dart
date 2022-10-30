@@ -11,6 +11,12 @@ class AuthViewModel extends BaseViewModel {
 
   final AuthService authService;
   final TextEditingController pinController = TextEditingController();
+  final List<List<String>> actionTitles = [
+    ['1', '2', '3'],
+    ['4', '5', '6'],
+    ['7', '8', '9'],
+    ['F', '0', 'C']
+  ];
 
   bool faceIdAvailavle = false;
   bool touchIdAvailable = false;

@@ -12,24 +12,17 @@ class GalleryService extends AppService<LocalGalleryDataSource, BaseRemoteDataSo
   Future<void> init() async {}
 
   Future<void> saveImage({
-    Uint8List? image,
     required ByteData? art,
   }) async {
     final artByteList = art?.buffer.asUint8List();
-    Uint8List newImage = Uint8List.fromList(
-      [
-        ...artByteList ?? [],
-        ...image ?? [],
-      ],
-    );
     final dir = await getExternalStorageDirectory();
-    if (dir == null) {
+    if (dir == null || artByteList == null) {
       errorService.showEror();
       return;
     }
     final path = '${dir.path}${const Uuid().v4()}.jpg';
     try {
-      await lds.saveImage(path: path, data: newImage);
+      await lds.saveImage(path: path, data: artByteList);
     } catch (_) {
       errorService.showEror();
     }

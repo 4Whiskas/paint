@@ -76,11 +76,21 @@ class $AssetsIconsGen {
   /// File path: assets/icons/add.svg
   SvgGenImage get add => const SvgGenImage('assets/icons/add.svg');
 
+  /// File path: assets/icons/brightness.svg
+  SvgGenImage get brightness =>
+      const SvgGenImage('assets/icons/brightness.svg');
+
   /// File path: assets/icons/brush.svg
   SvgGenImage get brush => const SvgGenImage('assets/icons/brush.svg');
 
   /// File path: assets/icons/clear.svg
   SvgGenImage get clear => const SvgGenImage('assets/icons/clear.svg');
+
+  /// File path: assets/icons/contrast.svg
+  SvgGenImage get contrast => const SvgGenImage('assets/icons/contrast.svg');
+
+  /// File path: assets/icons/crop.svg
+  SvgGenImage get crop => const SvgGenImage('assets/icons/crop.svg');
 
   /// File path: assets/icons/dropdown_arrow.svg
   SvgGenImage get dropdownArrow =>
@@ -95,8 +105,20 @@ class $AssetsIconsGen {
   /// File path: assets/icons/filter.svg
   SvgGenImage get filter => const SvgGenImage('assets/icons/filter.svg');
 
+  /// File path: assets/icons/flip.svg
+  SvgGenImage get flip => const SvgGenImage('assets/icons/flip.svg');
+
+  /// File path: assets/icons/fliph.svg
+  SvgGenImage get fliph => const SvgGenImage('assets/icons/fliph.svg');
+
+  /// File path: assets/icons/flipv.svg
+  SvgGenImage get flipv => const SvgGenImage('assets/icons/flipv.svg');
+
   /// File path: assets/icons/pencil.svg
   SvgGenImage get pencil => const SvgGenImage('assets/icons/pencil.svg');
+
+  /// File path: assets/icons/reset.svg
+  SvgGenImage get reset => const SvgGenImage('assets/icons/reset.svg');
 
   /// File path: assets/icons/rollBack.svg
   SvgGenImage get rollBack => const SvgGenImage('assets/icons/rollBack.svg');
@@ -104,6 +126,13 @@ class $AssetsIconsGen {
   /// File path: assets/icons/rollForward.svg
   SvgGenImage get rollForward =>
       const SvgGenImage('assets/icons/rollForward.svg');
+
+  /// File path: assets/icons/rotate.svg
+  SvgGenImage get rotate => const SvgGenImage('assets/icons/rotate.svg');
+
+  /// File path: assets/icons/saturation.svg
+  SvgGenImage get saturation =>
+      const SvgGenImage('assets/icons/saturation.svg');
 
   /// File path: assets/icons/search.svg
   SvgGenImage get search => const SvgGenImage('assets/icons/search.svg');
@@ -114,15 +143,24 @@ class $AssetsIconsGen {
   /// List of all assets
   List<SvgGenImage> get values => [
         add,
+        brightness,
         brush,
         clear,
+        contrast,
+        crop,
         dropdownArrow,
         eraser,
         faceid,
         filter,
+        flip,
+        fliph,
+        flipv,
         pencil,
+        reset,
         rollBack,
         rollForward,
+        rotate,
+        saturation,
         search,
         touchid
       ];

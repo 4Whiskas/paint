@@ -19,8 +19,8 @@ class PinButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: (MediaQuery.of(context).size.width - 160) / 3,
-      height: (MediaQuery.of(context).size.width - 160) / 3,
+      width: 80,
+      height: 80,
       child: CupertinoButton(
         onPressed: onTap,
         borderRadius: BorderRadius.circular(90),
