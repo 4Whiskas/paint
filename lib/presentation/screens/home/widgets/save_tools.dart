@@ -28,7 +28,7 @@ class SaveTools extends ViewModelWidget<HomeViewModel> {
           width: MediaQuery.of(context).size.width,
           height: 40,
           child: AppTextButton(
-            onTap: viewModel.saveToLocal,
+            onTap: ()=>viewModel.saveToLocal(context),
             text: LocaleKeys.save.tr(),
           ),
         ),

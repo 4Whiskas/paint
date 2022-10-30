@@ -1,14 +1,17 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_drawing_board/flutter_drawing_board.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_editor/image_editor.dart';
 import 'package:image_picker/image_picker.dart' as picker;
 import 'package:paint/domain/services/error_service.dart';
 import 'package:paint/domain/services/gallery_service.dart';
 import 'package:paint/gen/colors.gen.dart';
+import 'package:paint/gen/locale_keys.g.dart';
 import 'package:paint/presentation/screens/home/dialogs/select_image_source.dart';
 import 'package:paint/presentation/screens/home/enums/paint_tool.dart';
 import 'package:stacked/stacked.dart';
@@ -88,13 +91,13 @@ class HomeViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future<void> saveToLocal() async {
+  Future<void> saveToLocal(BuildContext context) async {
     await galleryService.saveImage(
       art: await drawingController.getImageData(),
     );
+    Fluttertoast.showToast(msg: LocaleKeys.saveSuccess.tr());
   }
 
-  Future<void> saveToHive() async {}
 
   void fillOptions() {
     clearOption = ColorOption();

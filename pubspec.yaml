@@ -64,6 +64,7 @@ dependencies:
   gallery_saver: ^2.3.2
   image_editor: ^1.1.0
   image_cropper: ^3.0.0
+  fluttertoast: ^8.1.1
 
 dev_dependencies:
   flutter_test:

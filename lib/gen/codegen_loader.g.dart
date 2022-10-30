@@ -1,6 +1,6 @@
 // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
 
-// ignore_for_file: prefer_single_quotes
+// ignore_for_file: prefer_single_quotes, avoid_renaming_method_parameters
 
 import 'dart:ui';
 
@@ -34,7 +34,8 @@ class CodegenLoader extends AssetLoader{
   "setPassword": "Set a password for the security of your data",
   "enterPassword": "Enter your password to log in to the app",
   "wrongPassword": "Invalid password",
-  "chooseImageSource": "Choose from where to choose an image"
+  "chooseImageSource": "Choose from where to choose an image",
+  "saveSuccess": "Successfully saved"
 };
 static const Map<String,dynamic> ru = {
   "appName": "Paint",
@@ -56,7 +57,8 @@ static const Map<String,dynamic> ru = {
   "setPassword": "Установите пароль для безопасности ваших данных",
   "enterPassword": "Введите пароль чтобы войти в приложение",
   "wrongPassword": "Неверный пароль",
-  "chooseImageSource": "Выберите откуда выбрать изображение"
+  "chooseImageSource": "Выберите откуда выбрать изображение",
+  "saveSuccess": "Успешно сохраненно"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "ru": ru};
 }
