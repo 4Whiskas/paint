@@ -6,11 +6,11 @@
 
 * Состояние без картинки
 
-![Без картинки](assets/images/without_image.jpg)
+<img width="400" src="assets/images/without_image.jpg"><p>
 
 * Состояние с картинкой
 
-![С картинкой](assets/images/with_image.jpg)
+<img width="400" src="assets/images/with_image.jpg"><p>
 
 # Стек
 
