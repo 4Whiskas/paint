@@ -16,37 +16,37 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     locale = context.locale;
-    return Provider(
-      create: GlobalDependency.new,
-      dispose: (_, global) => global.dispose(),
-      child: MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-        title: 'sbeugram',
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      title: 'sbeugram',
 
-        //localization
-        supportedLocales: context.supportedLocales,
-        locale: locale,
-        localizationsDelegates: context.localizationDelegates,
-        //theming
-        theme: ThemeData(
-          useMaterial3: true,
-          scaffoldBackgroundColor: ColorName.white,
-        ),
-        //navigation
-        routerDelegate: router.delegate(),
-        routeInformationParser: router.defaultRouteParser(),
-        //builders
-        builder: (_, child) {
-          return Navigator(
-            pages: [
-              CupertinoPage(
+      //localization
+      supportedLocales: context.supportedLocales,
+      locale: locale,
+      localizationsDelegates: context.localizationDelegates,
+      //theming
+      theme: ThemeData(
+        useMaterial3: true,
+        scaffoldBackgroundColor: ColorName.white,
+      ),
+      //navigation
+      routerDelegate: router.delegate(),
+      routeInformationParser: router.defaultRouteParser(),
+      //builders
+      builder: (_, child) {
+        return Navigator(
+          pages: [
+            CupertinoPage(
+              child: Provider(
+                create: GlobalDependency.new,
+                dispose: (_, global) => global.dispose(),
                 child: child ?? const SizedBox(),
               ),
-            ],
-            onPopPage: (_, __) => false,
-          );
-        },
-      ),
+            ),
+          ],
+          onPopPage: (_, __) => false,
+        );
+      },
     );
   }
 }

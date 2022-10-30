@@ -24,9 +24,12 @@ class ErrorService {
             style: AppTypography.sf.w400.s14.black,
           ),
           actions: [
-            AppTextButton(
-              onTap: Navigator.of(context).pop,
-              text: 'Ok',
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: AppTextButton(
+                onTap: Navigator.of(context).pop,
+                text: 'Ok',
+              ),
             ),
           ],
         );
