@@ -158,66 +158,69 @@ class DrawTools extends ViewModelWidget<HomeViewModel> {
                 ],
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: Row(
-                children: [
-                  Column(
-                    children: [
-                      RotatedBox(
-                        quarterTurns: 3,
-                        child: CupertinoSlider(
-                          min: 1,
-                          max: 100,
-                          value: viewModel.selectedBrightness,
-                          onChanged: viewModel.updateBrihtnessValue,
-                          onChangeEnd: viewModel.changeBrightness,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 5),
+                child: Row(
+                  children: [
+                    Column(
+                      children: [
+                        RotatedBox(
+                          quarterTurns: 3,
+                          child: CupertinoSlider(
+                            min: 1,
+                            max: 300,
+                            value: viewModel.selectedBrightness,
+                            onChanged: viewModel.updateBrihtnessValue,
+                            onChangeEnd: viewModel.changeBrightness,
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        width: 16,
-                        height: 16,
-                        child: Assets.icons.brightness.svg(),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      RotatedBox(
-                        quarterTurns: 3,
-                        child: CupertinoSlider(
-                          min: 1,
-                          max: 100,
-                          value: viewModel.selectedContrast,
-                          onChanged: viewModel.updateContrastValue,
-                          onChangeEnd: viewModel.changeContrast,
+                        SizedBox(
+                          width: 16,
+                          height: 16,
+                          child: Assets.icons.brightness.svg(),
                         ),
-                      ),
-                      SizedBox(
-                        width: 16,
-                        height: 16,
-                        child: Assets.icons.contrast.svg(),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      RotatedBox(
-                        quarterTurns: 3,
-                        child: CupertinoSlider(
-                          min: 1,
-                          max: 100,
-                          value: viewModel.selectedSaturation,
-                          onChanged: viewModel.updateSaturationValue,
-                          onChangeEnd: viewModel.changeSaturation,
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        RotatedBox(
+                          quarterTurns: 3,
+                          child: CupertinoSlider(
+                            min: 1,
+                            max: 300,
+                            value: viewModel.selectedContrast,
+                            onChanged: viewModel.updateContrastValue,
+                            onChangeEnd: viewModel.changeContrast,
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        width: 16,
-                        height: 16,
-                        child: Assets.icons.saturation.svg(),
-                      ),
-                    ],
-                  ),
-                ],
+                        SizedBox(
+                          width: 16,
+                          height: 16,
+                          child: Assets.icons.contrast.svg(),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        RotatedBox(
+                          quarterTurns: 3,
+                          child: CupertinoSlider(
+                            min: -1000,
+                            max: 1000,
+                            value: viewModel.selectedSaturation,
+                            onChanged: viewModel.updateSaturationValue,
+                            onChangeEnd: viewModel.changeSaturation,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 16,
+                          height: 16,
+                          child: Assets.icons.saturation.svg(),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

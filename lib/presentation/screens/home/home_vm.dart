@@ -1,15 +1,15 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:advance_image_picker/advance_image_picker.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_drawing_board/flutter_drawing_board.dart';
 import 'package:image_editor/image_editor.dart';
+import 'package:image_picker/image_picker.dart' as picker;
 import 'package:paint/domain/services/error_service.dart';
 import 'package:paint/domain/services/gallery_service.dart';
 import 'package:paint/gen/colors.gen.dart';
+import 'package:paint/presentation/screens/home/dialogs/select_image_source.dart';
 import 'package:paint/presentation/screens/home/enums/paint_tool.dart';
 import 'package:stacked/stacked.dart';
 
@@ -27,7 +27,6 @@ class HomeViewModel extends BaseViewModel {
 
   final DrawingController drawingController = DrawingController();
 
-  final configs = ImagePickerConfigs();
   final selectedOptions = ImageEditorOption();
 
   Option filterOption = ColorOption();
@@ -57,28 +56,24 @@ class HomeViewModel extends BaseViewModel {
       color: selectedColor,
       strokeWidth: selectedWidth,
     );
-    initImagePickerConfigs();
     fillOptions();
     // drawingController
   }
 
   Future<void> pickImage(BuildContext context) async {
-    final res = await Navigator.of(context).push<List<ImageObject>>(
-      PageRouteBuilder(
-        pageBuilder: (context, animation, __) {
-          return ImagePicker(
-            maxCount: 1,
-            configs: configs,
-          );
-        },
-      ),
+    final res = await showCupertinoDialog<picker.ImageSource>(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) => const SelectImageSource(),
     );
     if (res == null) return;
-
-    final selectedImage = File(res.first.modifiedPath);
+    final image = await picker.ImagePicker.platform.pickImage(source: res);
+    if(image == null) return;
+    final selectedImage = File(image.path);
     selectedImageBytes = await selectedImage.readAsBytes();
     originalImageBytes = selectedImageBytes;
     await fillFilters();
+    resetImage();
     notifyListeners();
   }
 
@@ -100,15 +95,6 @@ class HomeViewModel extends BaseViewModel {
   }
 
   Future<void> saveToHive() async {}
-
-  void initImagePickerConfigs() {
-    configs.appBarTextColor = Colors.black;
-    configs.stickerFeatureEnabled = false;
-    configs.translateFunc = (name, value) => Intl.message(
-          value,
-          name: name,
-        );
-  }
 
   void fillOptions() {
     clearOption = ColorOption();
@@ -162,7 +148,7 @@ class HomeViewModel extends BaseViewModel {
       errorService.showEror();
       return;
     }
-    contrastOption = ColorOption.contrast(value/100);
+    contrastOption = ColorOption.contrast(value / 100);
     await updateImage();
   }
 
@@ -207,17 +193,22 @@ class HomeViewModel extends BaseViewModel {
         saturationOption,
       ],
     );
+    final editedImage = originalImageBytes!;
     selectedImageBytes = await ImageEditor.editImage(
-      image: originalImageBytes!,
+      image: editedImage,
       imageEditorOption: selectedOptions,
     );
     notifyListeners();
   }
 
-  void resetImage(){
+  void resetImage() {
     selectedBrightness = 100;
     selectedSaturation = 100;
     selectedContrast = 100;
+    filterOption = ColorOption();
+    brightnessOption = ColorOption();
+    contrastOption = ColorOption();
+    saturationOption = ColorOption();
     selectedImageBytes = originalImageBytes;
     notifyListeners();
   }

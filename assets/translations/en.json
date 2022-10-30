@@ -17,5 +17,6 @@
     "authReason": "This will make it easier to unlock the app",
     "setPassword": "Set a password for the security of your data",
     "enterPassword": "Enter your password to log in to the app",
-    "wrongPassword":"Invalid password"
+    "wrongPassword":"Invalid password",
+    "chooseImageSource":"Choose from where to choose an image"
 }
