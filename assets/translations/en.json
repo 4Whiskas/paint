@@ -19,5 +19,7 @@
     "enterPassword": "Enter your password to log in to the app",
     "wrongPassword": "Invalid password",
     "chooseImageSource": "Choose from where to choose an image",
-    "saveSuccess": "Successfully saved"
+    "saveSuccess": "Successfully saved",
+    "beforeAfter": "Before/After",
+    "nice": "Nice!"
 }

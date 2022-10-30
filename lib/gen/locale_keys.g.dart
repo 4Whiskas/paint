@@ -22,5 +22,7 @@ abstract class  LocaleKeys {
   static const wrongPassword = 'wrongPassword';
   static const chooseImageSource = 'chooseImageSource';
   static const saveSuccess = 'saveSuccess';
+  static const beforeAfter = 'beforeAfter';
+  static const nice = 'nice';
 
 }

@@ -35,7 +35,9 @@ class CodegenLoader extends AssetLoader{
   "enterPassword": "Enter your password to log in to the app",
   "wrongPassword": "Invalid password",
   "chooseImageSource": "Choose from where to choose an image",
-  "saveSuccess": "Successfully saved"
+  "saveSuccess": "Successfully saved",
+  "beforeAfter": "Before/After",
+  "nice": "Nice!"
 };
 static const Map<String,dynamic> ru = {
   "appName": "Paint",
@@ -58,7 +60,9 @@ static const Map<String,dynamic> ru = {
   "enterPassword": "Введите пароль чтобы войти в приложение",
   "wrongPassword": "Неверный пароль",
   "chooseImageSource": "Выберите откуда выбрать изображение",
-  "saveSuccess": "Успешно сохраненно"
+  "saveSuccess": "Успешно сохраненно",
+  "beforeAfter": "До/После",
+  "nice": "Супер!"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "ru": ru};
 }

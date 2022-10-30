@@ -12,6 +12,7 @@ import 'package:paint/domain/services/error_service.dart';
 import 'package:paint/domain/services/gallery_service.dart';
 import 'package:paint/gen/colors.gen.dart';
 import 'package:paint/gen/locale_keys.g.dart';
+import 'package:paint/presentation/screens/home/dialogs/difference_dialog.dart';
 import 'package:paint/presentation/screens/home/dialogs/select_image_source.dart';
 import 'package:paint/presentation/screens/home/enums/paint_tool.dart';
 import 'package:stacked/stacked.dart';
@@ -71,7 +72,7 @@ class HomeViewModel extends BaseViewModel {
     );
     if (res == null) return;
     final image = await picker.ImagePicker.platform.pickImage(source: res);
-    if(image == null) return;
+    if (image == null) return;
     final selectedImage = File(image.path);
     selectedImageBytes = await selectedImage.readAsBytes();
     originalImageBytes = selectedImageBytes;
@@ -98,6 +99,25 @@ class HomeViewModel extends BaseViewModel {
     Fluttertoast.showToast(msg: LocaleKeys.saveSuccess.tr());
   }
 
+  Future<void> showDifference(BuildContext context) async {
+    if (originalImageBytes == null) {
+      errorService.showEror();
+      return;
+    }
+    final after = await drawingController.getImageData();
+    final afterBytes = after?.buffer.asUint8List();
+    if (afterBytes == null) {
+      errorService.showEror();
+      return;
+    }
+    await showCupertinoDialog(
+      context: context,
+      builder: (context) => DifferenceDialog(
+        before: originalImageBytes!,
+        after: afterBytes,
+      ),
+    );
+  }
 
   void fillOptions() {
     clearOption = ColorOption();
@@ -288,5 +308,11 @@ class HomeViewModel extends BaseViewModel {
 
   void onClearCanvas() {
     drawingController.clear();
+  }
+
+  @override
+  void dispose() {
+    drawingController.dispose();
+    super.dispose();
   }
 }

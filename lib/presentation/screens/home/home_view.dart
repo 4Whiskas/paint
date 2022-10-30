@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:paint/domain/di/global_dependency.dart';
 import 'package:paint/domain/di/user_dependency.dart';
@@ -34,6 +35,12 @@ class HomeView extends StatelessWidget {
           return Scaffold(
             backgroundColor: ColorName.lightGrey,
             appBar: AppBar(
+              leading: model.originalImageBytes == null
+                  ? null
+                  : AppIconButton(
+                      onTap: () => model.showDifference(context),
+                      iconWidget: const Icon(CupertinoIcons.arrow_2_circlepath),
+                    ),
               title: Text(
                 LocaleKeys.appName.tr(),
                 style: AppTypography.sf.s22.w500.black,
@@ -58,14 +65,13 @@ class HomeView extends StatelessWidget {
                   iconSize: 22,
                 ),
                 const SizedBox(width: 10),
-                if(model.selectedImageBytes!=null)
-                ...[
+                if (model.selectedImageBytes != null) ...[
                   AppIconButton(
-                  onTap: model.resetImage,
-                  icon: Assets.icons.reset,
-                  iconColor: ColorName.red,
-                  iconSize: 22,
-                ),
+                    onTap: model.resetImage,
+                    icon: Assets.icons.reset,
+                    iconColor: ColorName.red,
+                    iconSize: 22,
+                  ),
                   const SizedBox(width: 10),
                 ]
               ],

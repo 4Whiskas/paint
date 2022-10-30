@@ -8,7 +8,7 @@ class ErrorService {
   ErrorService(this._appContext);
   final BuildContext _appContext;
 
-  Future showEror({
+  Future<void> showEror({
     final String? error,
   }) async {
     await showCupertinoDialog(
