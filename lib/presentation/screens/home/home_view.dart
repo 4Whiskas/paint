@@ -32,82 +32,102 @@ class HomeView extends StatelessWidget {
         ),
         onModelReady: (model) => model.onReady(),
         builder: (context, model, child) {
-          return Scaffold(
-            backgroundColor: ColorName.lightGrey,
-            appBar: AppBar(
-              leading: model.originalImageBytes == null
-                  ? null
-                  : Tooltip(
-                      message: LocaleKeys.beforeAfter.tr(),
+          return Stack(
+            alignment: Alignment.center,
+            children: [
+              Scaffold(
+                backgroundColor: ColorName.lightGrey,
+                appBar: AppBar(
+                  leading: model.originalImageBytes == null
+                      ? null
+                      : Tooltip(
+                          message: LocaleKeys.beforeAfter.tr(),
+                          triggerMode: TooltipTriggerMode.longPress,
+                          child: AppIconButton(
+                            onTap: () => model.showDifference(context),
+                            iconWidget:
+                                const Icon(CupertinoIcons.arrow_2_circlepath),
+                          ),
+                        ),
+                  title: Text(
+                    LocaleKeys.appName.tr(),
+                    style: AppTypography.sf.s22.w500.black,
+                  ),
+                  actions: [
+                    Tooltip(
+                      message: LocaleKeys.rollBack.tr(),
                       triggerMode: TooltipTriggerMode.longPress,
                       child: AppIconButton(
-                        onTap: () => model.showDifference(context),
-                        iconWidget: const Icon(CupertinoIcons.arrow_2_circlepath),
+                        icon: Assets.icons.rollBack,
+                        onTap: model.rollBack,
+                        iconSize: 22,
                       ),
                     ),
-              title: Text(
-                LocaleKeys.appName.tr(),
-                style: AppTypography.sf.s22.w500.black,
+                    const SizedBox(width: 10),
+                    Tooltip(
+                      message: LocaleKeys.rollForward.tr(),
+                      triggerMode: TooltipTriggerMode.longPress,
+                      child: AppIconButton(
+                        icon: Assets.icons.rollForward,
+                        onTap: model.rollForward,
+                        iconSize: 22,
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Tooltip(
+                      message: LocaleKeys.addPicture.tr(),
+                      triggerMode: TooltipTriggerMode.longPress,
+                      child: AppIconButton(
+                        onTap: () => model.pickImage(context),
+                        icon: Assets.icons.add,
+                        iconColor: ColorName.green,
+                        iconSize: 22,
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    if (model.selectedImageBytes != null) ...[
+                      Tooltip(
+                        message: LocaleKeys.rollBackFilters.tr(),
+                        triggerMode: TooltipTriggerMode.longPress,
+                        child: AppIconButton(
+                          onTap: model.resetImage,
+                          icon: Assets.icons.reset,
+                          iconColor: ColorName.red,
+                          iconSize: 22,
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                    ]
+                  ],
+                  bottom: const PreferredSize(
+                    preferredSize: Size.fromHeight(40),
+                    child: SaveTools(),
+                  ),
+                ),
+                body: Stack(
+                  alignment: Alignment.center,
+                  children: const [
+                    DrawView(),
+                    DrawTools(),
+                    FilterTools(),
+                  ],
+                ),
               ),
-              actions: [
-                Tooltip(
-                  message: LocaleKeys.rollBack.tr(),
-                  triggerMode: TooltipTriggerMode.longPress,
-                  child: AppIconButton(
-                    icon: Assets.icons.rollBack,
-                    onTap: model.rollBack,
-                    iconSize: 22,
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Tooltip(
-                  message: LocaleKeys.rollForward.tr(),
-                  triggerMode: TooltipTriggerMode.longPress,
-                  child: AppIconButton(
-                    icon: Assets.icons.rollForward,
-                    onTap: model.rollForward,
-                    iconSize: 22,
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Tooltip(
-                  message: LocaleKeys.addPicture.tr(),
-                  triggerMode: TooltipTriggerMode.longPress,
-                  child: AppIconButton(
-                    onTap: () => model.pickImage(context),
-                    icon: Assets.icons.add,
-                    iconColor: ColorName.green,
-                    iconSize: 22,
-                  ),
-                ),
-                const SizedBox(width: 10),
-                if (model.selectedImageBytes != null) ...[
-                  Tooltip(
-                    message: LocaleKeys.rollBackFilters.tr(),
-                    triggerMode: TooltipTriggerMode.longPress,
-                    child: AppIconButton(
-                      onTap: model.resetImage,
-                      icon: Assets.icons.reset,
-                      iconColor: ColorName.red,
-                      iconSize: 22,
+              if (model.isBusy)
+                SizedBox(
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                  child: ColoredBox(
+                    color: ColorName.black.withOpacity(.3),
+                    child: const Center(
+                      child: CupertinoActivityIndicator(
+                        color: CupertinoColors.activeBlue,
+                        radius: 15,
+                      ),
                     ),
                   ),
-                  const SizedBox(width: 10),
-                ]
-              ],
-              bottom: const PreferredSize(
-                preferredSize: Size.fromHeight(40),
-                child: SaveTools(),
-              ),
-            ),
-            body: Stack(
-              alignment: Alignment.center,
-              children: const [
-                DrawView(),
-                DrawTools(),
-                FilterTools(),
-              ],
-            ),
+                ),
+            ],
           );
         },
       ),

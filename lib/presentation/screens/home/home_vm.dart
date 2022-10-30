@@ -30,7 +30,7 @@ class HomeViewModel extends BaseViewModel {
   final GalleryService galleryService;
   final ErrorService errorService;
 
-  final DrawingController drawingController = DrawingController();
+  late DrawingController drawingController;
 
   final selectedOptions = ImageEditorOption();
 
@@ -58,6 +58,7 @@ class HomeViewModel extends BaseViewModel {
   double selectedSaturation = 100;
 
   Future<void> onReady() async {
+    drawingController = DrawingController();
     drawingController.setStyle(
       color: selectedColor,
       strokeWidth: selectedWidth,
@@ -67,6 +68,7 @@ class HomeViewModel extends BaseViewModel {
   }
 
   Future<void> pickImage(BuildContext context) async {
+    setBusy(true);
     final res = await showCupertinoDialog<picker.ImageSource>(
       context: context,
       barrierDismissible: true,
@@ -79,6 +81,7 @@ class HomeViewModel extends BaseViewModel {
       image = await picker.ImagePicker.platform.pickImage(source: res);
     } catch (_) {
       errorService.showEror();
+      setBusy(false);
       return;
     }
 
@@ -89,7 +92,7 @@ class HomeViewModel extends BaseViewModel {
     originalImageBytes = selectedImageBytes;
     await fillFilters();
     resetImage();
-    notifyListeners();
+    setBusy(false);
   }
 
   Future<void> setBrushColor(BuildContext context) async {
@@ -104,9 +107,11 @@ class HomeViewModel extends BaseViewModel {
   }
 
   Future<void> saveToLocal(BuildContext context) async {
+    setBusy(true);
     await galleryService.saveImage(
       art: await drawingController.getImageData(),
     );
+    setBusy(false);
     Fluttertoast.showToast(msg: LocaleKeys.saveSuccess.tr());
   }
 
@@ -358,4 +363,5 @@ class HomeViewModel extends BaseViewModel {
     drawingController.dispose();
     super.dispose();
   }
+
 }
