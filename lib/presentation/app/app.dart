@@ -18,7 +18,7 @@ class App extends StatelessWidget {
     locale = context.locale;
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      title: 'sbeugram',
+      title: 'paint',
 
       //localization
       supportedLocales: context.supportedLocales,

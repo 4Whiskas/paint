@@ -63,7 +63,7 @@ class HomeViewModel extends BaseViewModel {
       color: selectedColor,
       strokeWidth: selectedWidth,
     );
-    fillOptions();
+    fillOptions();    
     // drawingController
   }
 
@@ -74,7 +74,10 @@ class HomeViewModel extends BaseViewModel {
       barrierDismissible: true,
       builder: (context) => const SelectImageSource(),
     );
-    if (res == null) return;
+    if (res == null) {
+      setBusy(false);
+      return;
+    }
     picker.PickedFile? image;
     try {
       // ignore: invalid_use_of_visible_for_testing_member
@@ -85,7 +88,10 @@ class HomeViewModel extends BaseViewModel {
       return;
     }
 
-    if (image == null) return;
+    if (image == null) {
+      setBusy(false);
+      return;
+    }
     selectedImagePath = image.path;
     final selectedImage = File(image.path);
     selectedImageBytes = await selectedImage.readAsBytes();
@@ -120,12 +126,13 @@ class HomeViewModel extends BaseViewModel {
       errorService.showEror();
       return;
     }
-    final after = await drawingController.getImageData();
+    final after = await drawingController.getImageData();    
     final afterBytes = after?.buffer.asUint8List();
     if (afterBytes == null) {
       errorService.showEror();
       return;
     }
+    // ignore: use_build_context_synchronously
     await showCupertinoDialog(
       context: context,
       builder: (context) => DifferenceDialog(
@@ -363,5 +370,4 @@ class HomeViewModel extends BaseViewModel {
     drawingController.dispose();
     super.dispose();
   }
-
 }
